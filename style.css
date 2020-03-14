@@ -1,0 +1,13 @@
+.inputBox:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #49A078;
+}
+
+.btn-outline-success:focus, .btn-outline-success:hover, .btn-outline-success:active {
+    outline: none !important;
+    box-shadow: none !important;    
+    border-color: #49A078;
+    background: #49A078;
+}
+
