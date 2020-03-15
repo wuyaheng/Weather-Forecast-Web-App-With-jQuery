@@ -22,15 +22,15 @@ $("#search-button").on("click", function(event) {
 });
 
 function updateForecastWeather(ForecastData){
-    $("#forecastContainer").html("<div>").append("<div class='row justify-content-between' id='forecastRowContainer'>");
+    $("#forecastContainer").html("<div>").append("<div class='row justify-content-around text-justify' id='forecastRowContainer'>");
     for(var i = 0; i < ForecastData.list.length; i++) {
         if(ForecastData.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-            var col = $("<div>").addClass("forecast-div").addClass("col-md-2");
+            var col = $("<div>").addClass("forecast-div").addClass("col-md-2").addClass("card cardBackground mb-3");
             var Ftemp_f = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(ForecastData.list[i].main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F");
             var humid_f = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(ForecastData.list[i].main.humidity) + "%");
-            var wind_f = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(ForecastData.list[i].wind.speed) + " MPH");
+            var wind_f = $("<p>").addClass("card-text mb-2").text("Wind Speed: " + JSON.stringify(ForecastData.list[i].wind.speed) + " MPH");
             var img_f = $("<img>").attr("src","http://openweathermap.org/img/wn/" + ForecastData.list[i].weather[0].icon + "@2x.png");
-            var Datef = $("<p>").addClass("card-text").text(JSON.parse(JSON.stringify(ForecastData.list[i].dt_txt)).substring(0, 10));
+            var Datef = $("<p>").addClass("card-text text-center mt-2").text(JSON.parse(JSON.stringify(ForecastData.list[i].dt_txt)).substring(0, 10));
             col.append(Datef, img_f, Ftemp_f, humid_f, wind_f);
             $("#forecastRowContainer").append(col);
         }
