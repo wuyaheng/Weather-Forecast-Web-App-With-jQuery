@@ -25,7 +25,7 @@ function updateForecastWeather(ForecastData){
     $("#forecastContainer").html("<div>").append("<div class='row justify-content-around text-justify' id='forecastRowContainer'>");
     for(var i = 0; i < ForecastData.list.length; i++) {
         if(ForecastData.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-            var col = $("<div>").addClass("forecast-div").addClass("col-md-2").addClass("card cardBackground mb-3");
+            var col = $("<div>").addClass("forecast-div").addClass("col-md-2").addClass("card mb-3").addClass("cardBackground");
             var Ftemp_f = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(ForecastData.list[i].main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F");
             var humid_f = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(ForecastData.list[i].main.humidity) + "%");
             var wind_f = $("<p>").addClass("card-text mb-2").text("Wind Speed: " + JSON.stringify(ForecastData.list[i].wind.speed) + " MPH");
