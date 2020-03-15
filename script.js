@@ -25,8 +25,9 @@ function updateCurrentWeather(Data) {
     var humid = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(Data.main.humidity) + "%");
     var wind = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(Data.wind.speed) + " MPH");
     var img = $("<img>").attr("src","http://openweathermap.org/img/wn/" + Data.weather[0].icon + "@2x.png");
-  
-    $("#todayContainer").append(title, img, Ftemp, humid, wind);
+    var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
+    $(".card-header").append(currentDate);
+    $("#todayContainer").append(title, img, Ftemp, humid, wind); 
 }
 
 
