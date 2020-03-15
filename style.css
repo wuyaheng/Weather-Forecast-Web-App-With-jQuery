@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
 .inputBox:focus {
     outline: none !important;
     box-shadow: none !important;
@@ -43,3 +45,7 @@
 input{
     text-indent: 10px;
   }
+
+.textEffect {
+    font-family: 'Ubuntu', sans-serif;
+}
