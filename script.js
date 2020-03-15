@@ -30,8 +30,9 @@ function updateForecastWeather(ForecastData){
             var humid_f = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(ForecastData.list[i].main.humidity) + "%");
             var wind_f = $("<p>").addClass("card-text mb-2").text("Wind Speed: " + JSON.stringify(ForecastData.list[i].wind.speed) + " MPH");
             var img_f = $("<img>").addClass("h-100").attr("src","https://openweathermap.org/img/wn/" + ForecastData.list[i].weather[0].icon + "@2x.png").addClass("fixImg");
+            var descr_F = $("<span>").addClass("card-text text-center mb-2").text(JSON.parse(JSON.stringify(ForecastData.list[i].weather[0].description)));
             var Datef = $("<p>").addClass("card-text text-center mt-2").text(JSON.parse(JSON.stringify(ForecastData.list[i].dt_txt)).substring(0, 10));
-            col.append(Datef, img_f, Ftemp_f, humid_f, wind_f);
+            col.append(Datef, img_f, descr_F, Ftemp_f, humid_f, wind_f);
             $("#forecastRowContainer").append(col);
         }
     }
@@ -39,16 +40,18 @@ function updateForecastWeather(ForecastData){
 
 
 function updateCurrentWeather(Data) {
-    var title = $("<h3>").addClass("card-title").text(JSON.parse(JSON.stringify(Data.name)));
+    console.log(Data);
+    var title = $("<h3>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(Data.name)));
    
     // (K − 273.15) × 9/5 + 32 = °F
     var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(Data.main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F");
     var humid = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(Data.main.humidity) + "%");
     var wind = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(Data.wind.speed) + " MPH");
     var img = $("<img>").attr("src","https://openweathermap.org/img/wn/" + Data.weather[0].icon + "@2x.png"); 
+    var descr = $("<span>").addClass("card-text").text(JSON.parse(JSON.stringify(Data.weather[0].description)));
     // var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
     // $(".card-header").html("<div>").append(currentDate);
-    $("#todayContainer").html("<div>").append(title, img, Ftemp, humid, wind); 
+    $("#todayContainer").html("<div>").append(title, img, descr, Ftemp, humid, wind); 
 }
 
 
