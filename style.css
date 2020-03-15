@@ -11,3 +11,7 @@
     background: #49A078;
 }
 
+.form-inline .form-control { 
+    display: inline-block !important; 
+    width: auto!important;
+}
