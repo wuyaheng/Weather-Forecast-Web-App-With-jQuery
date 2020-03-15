@@ -22,16 +22,17 @@ $("#search-button").on("click", function(event) {
 });
 
 function updateForecastWeather(ForecastData){
+    $("#forecastContainer").html("<div>").append("<div class='row justify-content-between' id='forecastRowContainer'>");
     for(var i = 0; i < ForecastData.list.length; i++) {
         if(ForecastData.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-            console.log(ForecastData);
             var col = $("<div>").addClass("forecast-div").addClass("col-md-2");
             var Ftemp_f = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(ForecastData.list[i].main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F");
             var humid_f = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(ForecastData.list[i].main.humidity) + "%");
             var wind_f = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(ForecastData.list[i].wind.speed) + " MPH");
             var img_f = $("<img>").attr("src","http://openweathermap.org/img/wn/" + ForecastData.list[i].weather[0].icon + "@2x.png");
-            col.append(img_f, Ftemp_f, humid_f, wind_f);
-            $("#forecastContainer").append(col);
+            var Datef = $("<p>").addClass("card-text").text(JSON.parse(JSON.stringify(ForecastData.list[i].dt_txt)).substring(0, 10));
+            col.append(Datef, img_f, Ftemp_f, humid_f, wind_f);
+            $("#forecastRowContainer").append(col);
         }
     }
 }
@@ -45,9 +46,9 @@ function updateCurrentWeather(Data) {
     var humid = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(Data.main.humidity) + "%");
     var wind = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(Data.wind.speed) + " MPH");
     var img = $("<img>").attr("src","http://openweathermap.org/img/wn/" + Data.weather[0].icon + "@2x.png");
-    var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
-    $(".card-header").append(currentDate);
-    $("#todayContainer").append(title, img, Ftemp, humid, wind); 
+    // var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
+    // $(".card-header").html("<div>").append(currentDate);
+    $("#todayContainer").html("<div>").append(title, img, Ftemp, humid, wind); 
 }
 
 
