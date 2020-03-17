@@ -1,9 +1,30 @@
+
+
+var userCityArray = JSON.parse(localStorage.getItem("userCityArray")) || [];
+
+localStorage.clear();
+
 // add click event to search button
+
 $("#search-button").on("click", function(event) {
     // prevent page from reloading on form submit
     event.preventDefault();
     // build the query url for the ajax request to the open weather API
     var searchValue = $("#search-value").val();
+    userCityArray.push(searchValue);
+    console.log(userCityArray);
+    localStorage.setItem("userCityArray", JSON.stringify(userCityArray));
+
+    for (var i = 0; i < userCityArray.length; i++) {
+        var cityButton = $('<button/>').addClass("btn btn-light d-inline").text(userCityArray[i]);
+        $(".history").append(cityButton);
+    }
+
+
+
+
+
+
     var apiKey = "76093c5b76715cabd5992fc44d0a2e7e"
     var queryCurrentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&APPID=" + apiKey;
     // make ajax request to the API and GET JSON data
@@ -53,5 +74,10 @@ function updateCurrentWeather(Data) {
     // $(".card-header").html("<div>").append(currentDate); 
     $("#todayContainer").html("<div>").append(title, img, descr, Ftemp, humid, wind); 
 }
+
+
+
+
+
 
 
