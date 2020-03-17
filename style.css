@@ -49,3 +49,8 @@ input{
 .textEffect {
     font-family: 'Ubuntu', sans-serif;
 }
+
+.btn-light:focus, .btn-light:hover {
+    outline: none;
+    box-shadow: none;
+}

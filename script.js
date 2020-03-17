@@ -12,15 +12,13 @@ $("#search-button").on("click", function(event) {
     // build the query url for the ajax request to the open weather API
     var searchValue = $("#search-value").val();
     userCityArray.push(searchValue);
-    console.log(userCityArray);
+ 
     localStorage.setItem("userCityArray", JSON.stringify(userCityArray));
 
     for (var i = 0; i < userCityArray.length; i++) {
-        var cityButton = $('<button/>').addClass("btn btn-light d-inline").text(userCityArray[i]);
-        $(".history").append(cityButton);
+        var cityButton = $('<button/>').addClass("btn btn-light d-inline historyItem mr-1").text(userCityArray[i]);
     }
-
-
+    $(".history").append(cityButton);
 
 
 
@@ -61,7 +59,6 @@ function updateForecastWeather(ForecastData){
 
 
 function updateCurrentWeather(Data) {
-    console.log(Data);
     var title = $("<h3>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(Data.name)));
    
     // (K − 273.15) × 9/5 + 32 = °F
