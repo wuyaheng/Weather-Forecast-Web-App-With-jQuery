@@ -13,7 +13,7 @@ Weather Forecast is a small application that displays today’s and the next fiv
 
 * Contributor
 
-* links
+* link
 
 * Questions
 
