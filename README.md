@@ -14,8 +14,6 @@ Weather Forecast is a small application that displays today’s and the next fiv
 
 * [Usage](#usage)
 
-* [Contributing](#contributing)
-
 * [Questions](#Questions)
 
 
@@ -27,9 +25,6 @@ https://phoebeyahengwu.github.io/Weather-Forecast-Web-App-With-jQuery/
 
 ## Usage
 Enter a city name in the input box and press the search icon next to it.
-
-## Contributing
-Please feel free to fork or clone the repo.
 
 ## Questions
 ![user profile image](https://avatars0.githubusercontent.com/u/52837649?v=4)
