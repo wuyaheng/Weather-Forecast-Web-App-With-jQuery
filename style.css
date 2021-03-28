@@ -54,3 +54,8 @@ input{
     outline: none;
     box-shadow: none;
 }
+
+#mapid { 
+    height: 380px; 
+    border-radius: 3px;
+} 
