@@ -3,6 +3,7 @@ const base_url = "https://maps.googleapis.com/maps/api/geocode/json"
 var historyObj = {}
 var MAP_CONTAINER = document.getElementById('mapidContainer')
 
+
 localStorage.clear();
 
 $("#search-button").on("click", function(event) {
@@ -29,47 +30,15 @@ function getWeatherForCity(name) {
     if(historyObj[name]) {
         console.log("first function")
         updateCurrentWeather(name);
-        console.log("second function") 
-        updateForecastWeather(name) 
     } else {
         var queryCurrentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + name + "&APPID=" + apiKey;
         $.ajax({
             url: queryCurrentURL,
             method: "GET"
         }).then(data => {
-            console.log("fetched data for current", data)
             addToHistoryObj(data.name, "current", data)
             updateCurrentWeather(data.name)
         });
-    
-        var queryForecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + name + "&APPID=" + apiKey;
-        $.ajax({
-            url: queryForecastURL,
-            method: "GET"
-        }).then(data => {
-            console.log("fetched data for forecast", data) 
-            addToHistoryObj(data.city.name, "forecast", data)
-            updateForecastWeather(data.city.name) 
-        });
-    }
-}
-
-function updateForecastWeather(name){
-    console.log("update forecast weather") 
-    const ForecastData = historyObj[name].forecast 
-    $("#forecastContainer").html("<div>").append("<div class='row justify-content-between text-justify' id='forecastRowContainer'>");
-    for(var i = 0; i < ForecastData.list.length; i++) { 
-        if(ForecastData.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-            var col = $("<div>").addClass("forecast-div").addClass("col-md-2").addClass("card hoverable mb-3").addClass("cardBackground");
-            var Ftemp_f = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(ForecastData.list[i].main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F");
-            var humid_f = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(ForecastData.list[i].main.humidity) + "%");
-            var wind_f = $("<p>").addClass("card-text mb-2").text("Wind Speed: " + JSON.stringify(ForecastData.list[i].wind.speed) + " MPH");
-            var img_f = $("<img>").addClass("h-100 rounded mx-auto d-block").attr("src","https://openweathermap.org/img/wn/" + ForecastData.list[i].weather[0].icon + "@2x.png").addClass("fixImg");
-            var descr_F = $("<p>").addClass("card-text text-center textEffect text-white mb-2").text(JSON.parse(JSON.stringify(ForecastData.list[i].weather[0].description)));
-            var Datef = $("<p>").addClass("card-text text-center mt-2").text(JSON.parse(JSON.stringify(ForecastData.list[i].dt_txt)).substring(0, 10));
-            col.append(Datef, img_f, descr_F, Ftemp_f, humid_f, wind_f);
-            $("#forecastRowContainer").append(col);
-        }
     }
 }
 
@@ -109,6 +78,34 @@ function updateCurrentWeather(cityName) {
         var ele = historyObj[key]
         L.marker([ele.current.coord.lat, ele.current.coord.lon]).addTo(mymap).bindTooltip(ele.current.name)
     }
+
+    var geoJson = L.geoJson(geodata.features, {
+        style: function (feature) {
+          return {
+            color: "white",
+            fillColor: "#a0ced9",
+            fillOpacity: 0.8,
+            weight: 1.5
+          };
+        },      
+        onEachFeature: function (feature, layer) {
+          layer.on({
+            mouseover: function (event) {
+              layer = event.target;
+              layer.setStyle({
+                fillOpacity: 1
+              });
+            },
+            mouseout: function (event) {
+              geoJson.resetStyle(event.target);
+            },
+            click: function (event) {
+              myMap.fitBounds(event.target.getBounds());
+            }
+          });
+          layer.bindTooltip("<p><b>" + feature.properties.name + "</b></p>");
+        }
+      }).addTo(mymap);
 }
 
 function addToHistoryObj(city, dataType, data) {

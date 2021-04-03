@@ -49,7 +49,7 @@ input{
 }
 
 #mapid { 
-    height: 380px; 
+    height: 500px; 
     border-radius: 3px;
 } 
 
@@ -62,4 +62,8 @@ input{
 
 .navbar {
     padding: 0rem !important;
+}
+
+#today .card {
+    height: 500px;
 }
