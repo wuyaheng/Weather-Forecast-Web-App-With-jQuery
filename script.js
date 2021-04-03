@@ -29,7 +29,6 @@ $("#search-button").on("click", function(event) {
 
 function getWeatherForCity(name) {
     if(historyObj[name]) {
-        console.log("first function")
         updateCurrentWeather(name);
     } else {
         var queryCurrentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + name + "&APPID=" + apiKey;
@@ -48,14 +47,13 @@ function updateCurrentWeather(cityName) {
     console.log("update current weather")  
     var data = historyObj[cityName].current
     var title = $("<h3>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(data.name)));
-    // (K − 273.15) × 9/5 + 32 = °F
-    var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(data.main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F" + " / " + (Number(data.main.temp) - 273.15).toFixed(2) + " °C");
+    var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(data.main.temp)) - 273.15) * 9/5 + 32).toFixed(0) + " °F" + " / " + (Number(data.main.temp) - 273.15).toFixed(0) + " °C");
     var humid = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(data.main.humidity) + "%");
     var wind = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(data.wind.speed) + " MPH");
     var img = $("<img>").attr("src","https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png").addClass("rounded mx-auto d-block"); 
     var descr = $("<p>").addClass("card-text text-center textEffect").text(JSON.parse(JSON.stringify(data.weather[0].description)));
-    // var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
-    // $(".card-header").html("<div>").append(currentDate); 
+    var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
+    $(".card-header").html("<div>").append(currentDate); 
     $("#todayContainer").html("<div>").append(title, img, descr, Ftemp, humid, wind); 
 
 
