@@ -48,7 +48,7 @@ function updateCurrentWeather(cityName) {
     var data = historyObj[cityName].current
     var title = $("<h3>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(data.name)));
     // (K − 273.15) × 9/5 + 32 = °F
-    var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(data.main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F");
+    var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(data.main.temp)) - 273.15) * 9/5 + 32).toFixed(2) + " °F" + " / " + (Number(data.main.temp) - 273.15).toFixed(2) + " °C");
     var humid = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(data.main.humidity) + "%");
     var wind = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(data.wind.speed) + " MPH");
     var img = $("<img>").attr("src","https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png").addClass("rounded mx-auto d-block"); 
