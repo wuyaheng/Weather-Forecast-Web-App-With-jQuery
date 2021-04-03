@@ -60,7 +60,15 @@ function updateCurrentWeather(cityName) {
     const MAP_ID = document.createElement("div");
     MAP_ID.setAttribute("id", "mapid");
     MAP_CONTAINER.appendChild(MAP_ID);
-    var mymap = L.map('mapid').setView([40, -97], 4);
+
+    var screenWidth = document.documentElement.clientWidth;
+    console.log(Number(screenWidth))
+    if (Number(screenWidth) < 768) {
+        var mymap = L.map('mapid').setView([40, -97],3);
+    } else {
+        var mymap = L.map('mapid').setView([40, -97],4);
+    }
+
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

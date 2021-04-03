@@ -58,6 +58,7 @@ input{
     padding-top: 0rem !important; 
     margin-top: 0rem !important;
     font-size: 20px !important;
+    color: #212529 !important;
 }
 
 .navbar {
@@ -100,4 +101,8 @@ p {
 
 .tooltipContainer {
     text-align: center;
+}
+
+body{
+    zoom:100% !important;
 }
