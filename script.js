@@ -44,7 +44,6 @@ function getWeatherForCity(name) {
 
 
 function updateCurrentWeather(cityName) {
-    console.log("update current weather")  
     var data = historyObj[cityName].current
     var title = $("<h3>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(data.name)));
     var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(data.main.temp)) - 273.15) * 9/5 + 32).toFixed(0) + " °F" + " / " + (Number(data.main.temp) - 273.15).toFixed(0) + " °C");
@@ -52,8 +51,8 @@ function updateCurrentWeather(cityName) {
     var wind = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(data.wind.speed) + " MPH");
     var img = $("<img>").attr("src","https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png").addClass("rounded mx-auto d-block"); 
     var descr = $("<p>").addClass("card-text text-center textEffect").text(JSON.parse(JSON.stringify(data.weather[0].description)));
-    var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
-    $(".card-header").html("<div>").append(currentDate); 
+    var currentDate = moment().format('LLL')  
+    $(".currentDate").html("<div>").append(currentDate); 
     $("#todayContainer").html("<div>").append(title, img, descr, Ftemp, wind, humid); 
 
 
@@ -75,7 +74,7 @@ function updateCurrentWeather(cityName) {
 
     for(var key in historyObj) {
         var ele = historyObj[key]
-        L.marker([ele.current.coord.lat, ele.current.coord.lon]).addTo(mymap).bindTooltip("<div class='tooltipContainer'><img src='https://openweathermap.org/img/wn/" + ele.current.weather[0].icon + "@2x.png'/>" + "<p><b>"+ ele.current.name +"</b></p></div>").openTooltip();
+        L.marker([ele.current.coord.lat, ele.current.coord.lon]).addTo(mymap).bindTooltip("<div class='tooltipContainer'><img src='https://openweathermap.org/img/wn/" + ele.current.weather[0].icon + "@2x.png'/>" + "<p><b>"+ ele.current.name +"</b></p><p>" + ((Number(JSON.stringify(ele.current.main.temp)) - 273.15) * 9/5 + 32).toFixed(0) + "°F / " + (Number(JSON.stringify(ele.current.main.temp)) - 273.15).toFixed(0) + "°C" +" </p></div>").openTooltip();
     }
 
     var geoJson = L.geoJson(geodata.features, {
