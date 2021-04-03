@@ -13,6 +13,7 @@ $("#search-button").on("click", function(event) {
  
     localStorage.setItem("userCityArray", JSON.stringify(userCityArray));
 
+    $('#search-value').val('')
     for (var i = 0; i < userCityArray.length; i++) {
         var cityButton = $('<button/>')
         .addClass("btn btn-light d-inline historyItem mr-1 mt-1")
