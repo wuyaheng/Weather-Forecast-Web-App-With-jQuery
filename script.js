@@ -54,7 +54,7 @@ function updateCurrentWeather(cityName) {
     var descr = $("<p>").addClass("card-text text-center textEffect").text(JSON.parse(JSON.stringify(data.weather[0].description)));
     var currentDate = moment().format('MMMM Do YYYY, h:mm A')  
     $(".card-header").html("<div>").append(currentDate); 
-    $("#todayContainer").html("<div>").append(title, img, descr, Ftemp, humid, wind); 
+    $("#todayContainer").html("<div>").append(title, img, descr, Ftemp, wind, humid); 
 
 
     MAP_CONTAINER.innerHTML = "" 
@@ -75,7 +75,7 @@ function updateCurrentWeather(cityName) {
 
     for(var key in historyObj) {
         var ele = historyObj[key]
-        L.marker([ele.current.coord.lat, ele.current.coord.lon]).addTo(mymap).bindTooltip(ele.current.name)
+        L.marker([ele.current.coord.lat, ele.current.coord.lon]).addTo(mymap).bindTooltip("<div class='tooltipContainer'><img src='https://openweathermap.org/img/wn/" + ele.current.weather[0].icon + "@2x.png'/>" + "<p><b>"+ ele.current.name +"</b></p></div>").openTooltip();
     }
 
     var geoJson = L.geoJson(geodata.features, {

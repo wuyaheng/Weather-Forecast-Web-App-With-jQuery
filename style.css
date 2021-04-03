@@ -82,3 +82,22 @@ input{
     background: #D4BAAE;
     color: #3A3238;
 }
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.card-text {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+} 
+
+#mapid img {
+    width: 40%;
+}
+
+.tooltipContainer {
+    text-align: center;
+}
