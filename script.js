@@ -83,7 +83,7 @@ function updateCurrentWeather(cityName) {
         style: function (feature) {
           return {
             color: "white",
-            fillColor: "#a0ced9",
+            fillColor: "#CACFD6",
             fillOpacity: 0.8,
             weight: 1.5
           };
