@@ -141,3 +141,8 @@ img {
 .row { 
     margin-bottom: 0 !important;
 }
+
+.history {
+    overflow-y: auto;
+    height: 118px;
+}
