@@ -66,7 +66,7 @@ function updateCurrentWeather(cityName) {
     if (Number(screenWidth) < 768) {
         var mymap = L.map('mapid').setView([40, -97],3);
     } else {
-        var mymap = L.map('mapid').setView([40, -97],4);
+        var mymap = L.map('mapid', {zoomControl: false}).setView([40, -97],4);
     }
 
 
@@ -78,7 +78,6 @@ function updateCurrentWeather(cityName) {
         zoomOffset: -1,
         accessToken: apiKeyMap
     }).addTo(mymap);
-
 
     for(var key in historyObj) {
         var ele = historyObj[key]
