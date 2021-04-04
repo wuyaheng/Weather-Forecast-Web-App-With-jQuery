@@ -126,14 +126,18 @@ body{
 }
 
 canvas {
-    height: 240px !important;
+    height: 260px !important;
 }
 
 .chartContainer {
-    height: 240px !important;
+    height: 260px !important; 
 }
 
 img {
     -webkit-filter: drop-shadow(2px 2px 2px #222);
     filter: drop-shadow(2px 2px 2px #222);
   }
+
+.row {
+    margin-bottom: 0 !important;
+}

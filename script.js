@@ -134,7 +134,7 @@ function updateCurrentWeather(cityName) {
             datasets: [{
                 label: Object.keys(historyObj)[0], 
                 lineTension: 0,
-                data: Object.values(historyObj)[0]?.forecast?.list.map((ele) => ele.main.temp), 
+                data: Object.values(historyObj)[0]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
                 fill: false,
                 borderColor: '#cea2ac',
                 backgroundColor: '#cea2ac', 
@@ -143,7 +143,7 @@ function updateCurrentWeather(cityName) {
                 {
                 label: Object.keys(historyObj)[1], 
                 lineTension: 0,
-                data: Object.values(historyObj)[1]?.forecast?.list.map((ele) => ele.main.temp),
+                data: Object.values(historyObj)[1]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)),
                 fill: false,
                 borderColor: '#b3c3b8', 
                 backgroundColor: '#b3c3b8', 
@@ -152,7 +152,7 @@ function updateCurrentWeather(cityName) {
                 {
                 label: Object.keys(historyObj)[2], 
                 lineTension: 0,
-                data: Object.values(historyObj)[2]?.forecast?.list.map((ele) => ele.main.temp),
+                data: Object.values(historyObj)[2]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
                 fill: false,
                 borderColor: '#98dfea', 
                 backgroundColor: '#98dfea', 
@@ -160,28 +160,35 @@ function updateCurrentWeather(cityName) {
                 }
             ]},
             options: {
-            responsive: true, 
-            maintainAspectRatio: false, 
-            title: {
-                display: true,
-                text: 'Temperature Comparision'
-                },
-            scales: {
-                xAxes: [{
-                      gridLines: {
-                          display: false
-                      }
-                  }],
-                yAxes: [{
-                      gridLines: {
-                          display: false
-                      },
-                      scaleLabel: {
-                          display: true,
-                          labelString: 'Temperature'
-                        }
-                  }]
-              }
+                scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                  },
+                plugins: {
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    title: {
+                        display: true,
+                        text: 'Temperature Comparision'
+                        },
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                display: false
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: {
+                                display: false
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Temperature'
+                                }
+                        }]
+                    }
+                }
             }
       });
 }
