@@ -136,8 +136,8 @@ function updateCurrentWeather(cityName) {
                 lineTension: 0,
                 data: Object.values(historyObj)[0]?.forecast?.list.map((ele) => ele.main.temp), 
                 fill: false,
-                borderColor: '#ED7188',
-                backgroundColor: '#ED7188', 
+                borderColor: '#cea2ac',
+                backgroundColor: '#cea2ac', 
                 borderWidth: 1 
                 },
                 {
@@ -145,8 +145,8 @@ function updateCurrentWeather(cityName) {
                 lineTension: 0,
                 data: Object.values(historyObj)[1]?.forecast?.list.map((ele) => ele.main.temp),
                 fill: false,
-                borderColor: '#F6E394', 
-                backgroundColor: '#F6E394', 
+                borderColor: '#b3c3b8', 
+                backgroundColor: '#b3c3b8', 
                 borderWidth: 1 
                 },
                 {
@@ -154,8 +154,8 @@ function updateCurrentWeather(cityName) {
                 lineTension: 0,
                 data: Object.values(historyObj)[2]?.forecast?.list.map((ele) => ele.main.temp),
                 fill: false,
-                borderColor: '#3A3238', 
-                backgroundColor: '#3A3238', 
+                borderColor: '#98dfea', 
+                backgroundColor: '#98dfea', 
                 borderWidth: 1 
                 }
             ]},
