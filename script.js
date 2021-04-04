@@ -6,7 +6,6 @@ var MAP_CONTAINER = document.getElementById('mapidContainer')
 getWeatherForCity("New York")
 getWeatherForCity("Seattle")
 getWeatherForCity("Dallas")
-// getWeatherForCity("Las Vegas")
 
 localStorage.clear();
 
@@ -33,7 +32,6 @@ function populateCityBtn() {
 
 
 function getWeatherForCity(name) {
-    console.log(name)
     if(historyObj[name]) {
         updateCurrentWeather(name);
     } else {
@@ -44,6 +42,14 @@ function getWeatherForCity(name) {
         }).then(data => {
             addToHistoryObj(data.name, "current", data)
             updateCurrentWeather(data.name)
+        });
+
+        var queryForecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + name + "&APPID=" + apiKey;
+        $.ajax({
+            url: queryForecastURL,
+            method: "GET"
+        }).then(data => {
+            addToHistoryObj(data.city.name, "forecast", data)
         });
     }
 }
@@ -75,7 +81,6 @@ function updateCurrentWeather(cityName) {
     MAP_CONTAINER.appendChild(MAP_ID);
 
     var screenWidth = document.documentElement.clientWidth;
-    console.log(Number(screenWidth))
     if (Number(screenWidth) < 768) {
         var mymap = L.map('mapid').setView([40, -97],3);
     } else {
@@ -120,6 +125,56 @@ function updateCurrentWeather(cityName) {
           layer.bindTooltip("<p><b>" + feature.properties.name + "</b></p>");
         }
       }).addTo(mymap);
+
+      var ctx = document.getElementById("myChart").getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Object.values(historyObj)[0].forecast.list.map((ele) => ele.dt_txt),
+            datasets: [{
+                label: Object.keys(historyObj)[0], // Name the series
+                lineTension: 0,
+                data: Object.values(historyObj)[0]?.forecast?.list.map((ele) => ele.main.temp), // Specify the data values array
+                fill: false,
+                borderColor: '#ED7188', // Add custom color border (Line)
+                backgroundColor: '#ED7188', // Add custom color background (Points and Fill)
+                borderWidth: 1 // Specify bar border width
+                },
+                {
+                label: Object.keys(historyObj)[1], 
+                lineTension: 0,
+                data: Object.values(historyObj)[1]?.forecast?.list.map((ele) => ele.main.temp),
+                fill: false,
+                borderColor: '#F6E394', 
+                backgroundColor: '#F6E394', 
+                borderWidth: 1 
+                }
+            ]},
+            options: {
+            responsive: true, 
+            maintainAspectRatio: false, 
+            title: {
+                display: true,
+                text: 'Temperature Comparision'
+                },
+            scales: {
+                xAxes: [{
+                      gridLines: {
+                          display: false,
+                      }
+                  }],
+                yAxes: [{
+                      gridLines: {
+                          display: false,
+                      },
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'Temperature'
+                        } 
+                  }]
+              }
+            }
+      });
 }
 
 function addToHistoryObj(city, dataType, data) {
@@ -129,6 +184,9 @@ function addToHistoryObj(city, dataType, data) {
     }
     historyObj[city][dataType] = data 
 }
+
+
+
 
 
 
