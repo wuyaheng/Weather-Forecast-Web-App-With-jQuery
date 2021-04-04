@@ -41,6 +41,9 @@ input{
 
 .textEffect {
     font-family: 'Ubuntu', sans-serif;
+    color: #3A3238;
+    text-transform: uppercase; 
+    font-weight: 620;
 }
 
 .btn-light:focus, .btn-light:hover {
@@ -49,7 +52,7 @@ input{
 }
 
 #mapid { 
-    height: 500px; 
+    height: 546px; 
     border-radius: 3px;
 } 
 
@@ -65,10 +68,21 @@ input{
 .navbar {
     padding: 0rem !important;
     background: #EFD9CE !important;
+    height: 44px;
+    line-height: 44px;
+}
+
+#today .card h5 {
+    margin: 0;
 }
 
 #today .card {
-    height: 500px;
+    margin: 0;
+    height: 266px;
+}
+
+#today .card img {
+    width: 24%;
 }
 
 #search-button {
@@ -92,8 +106,6 @@ p {
 }
 
 .card-text {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
     text-align: center;
 } 
 

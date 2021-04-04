@@ -64,7 +64,7 @@ function updateCurrentWeather(cityName) {
 
     populateCityBtn()
     var data = historyObj[cityName].current
-    var title = $("<h3>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(data.name)));
+    var title = $("<h5>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(data.name)));
     var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(data.main.temp)) - 273.15) * 9/5 + 32).toFixed(0) + " °F" + " / " + (Number(data.main.temp) - 273.15).toFixed(0) + " °C");
     var humid = $("<p>").addClass("card-text").text("Humidity: " + JSON.stringify(data.main.humidity) + "%");
     var wind = $("<p>").addClass("card-text").text("Wind Speed: " + JSON.stringify(data.wind.speed) + " MPH");
@@ -130,7 +130,7 @@ function updateCurrentWeather(cityName) {
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Object.values(historyObj)[0].forecast.list.map((ele) => moment(ele.dt_txt).format("L")),
+            labels: Object.values(historyObj)[0].forecast.list.map((ele) => moment(ele.dt_txt).format("l")),
             datasets: [{
                 label: Object.keys(historyObj)[0], 
                 lineTension: 0,
