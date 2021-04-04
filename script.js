@@ -3,31 +3,37 @@ const base_url = "https://maps.googleapis.com/maps/api/geocode/json"
 var historyObj = {}
 var MAP_CONTAINER = document.getElementById('mapidContainer')
 
+getWeatherForCity("New York")
+getWeatherForCity("Seattle")
+getWeatherForCity("Dallas")
+// getWeatherForCity("Las Vegas")
 
 localStorage.clear();
 
 $("#search-button").on("click", function(event) {
     event.preventDefault();
     var searchValue = $("#search-value").val();
-    userCityArray.push(searchValue);
- 
-    localStorage.setItem("userCityArray", JSON.stringify(userCityArray));
 
-    $('#search-value').val('')
-    for (var i = 0; i < userCityArray.length; i++) {
+    getWeatherForCity(searchValue)
+});
+
+function populateCityBtn() {
+    $(".history").empty()
+    for (var i = 0; i < userCityArray.length; i++) { 
+        let city = userCityArray[i]
         var cityButton = $('<button/>')
         .addClass("btn btn-light d-inline historyItem mr-1 mt-1")
         .text(userCityArray[i])
         .click(() => {
-            getWeatherForCity(searchValue)
+            getWeatherForCity(city)
         })
+        $(".history").append(cityButton);
     } 
-    $(".history").append(cityButton);
-    getWeatherForCity(searchValue)
-});
+}
 
 
 function getWeatherForCity(name) {
+    console.log(name)
     if(historyObj[name]) {
         updateCurrentWeather(name);
     } else {
@@ -44,6 +50,13 @@ function getWeatherForCity(name) {
 
 
 function updateCurrentWeather(cityName) {
+    if(!userCityArray.includes(cityName)) {
+        userCityArray.push(cityName);
+    }
+
+    $('#search-value').val('')
+
+    populateCityBtn()
     var data = historyObj[cityName].current
     var title = $("<h3>").addClass("card-title text-center").text(JSON.parse(JSON.stringify(data.name)));
     var Ftemp = $("<p>").addClass("card-text").text("Temperature: " + ((Number(JSON.stringify(data.main.temp)) - 273.15) * 9/5 + 32).toFixed(0) + " °F" + " / " + (Number(data.main.temp) - 273.15).toFixed(0) + " °C");
