@@ -118,8 +118,8 @@ function updateCurrentWeather(cityName) {
         style: function (feature) {
           return {
             color: "white",
-            fillColor: "#CACFD6",
-            fillOpacity: 0.8,
+            fillColor: "#EFD9CE",
+            fillOpacity: 0.6,
             weight: 1.5
           };
         },      
@@ -180,7 +180,7 @@ var myChart = new Chart(ctx, {
               maintainAspectRatio: false, 
               title: {
                   display: true,
-                  text: 'Temperature Comparision'
+                  text: 'Temperature Forecast Comparision'
                   }
               },
           scales: {
