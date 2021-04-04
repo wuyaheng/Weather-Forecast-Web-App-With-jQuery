@@ -3,9 +3,11 @@ const base_url = "https://maps.googleapis.com/maps/api/geocode/json"
 var historyObj = {}
 var MAP_CONTAINER = document.getElementById('mapidContainer')
 
-getWeatherForCity("New York")
 getWeatherForCity("Seattle")
 getWeatherForCity("Houston")
+getWeatherForCity("New York")
+
+
 
 localStorage.clear();
 
@@ -126,70 +128,48 @@ function updateCurrentWeather(cityName) {
         }
       }).addTo(mymap);
 
+      var colorArr = ['#cea2ac', '#bad0cf', '#c2cac1', '#fdcbac', '#e1ccba', '#3c787e', '#98c1d9', '#58586b', '#85ad87']
+      var dataForChart = []
+      for (var i = 0; i < Object.keys(historyObj).length; i++) {
+          dataForChart.push({
+            label: Object.keys(historyObj)[i], 
+            lineTension: 0,
+            data: Object.values(historyObj)[i]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
+            fill: false,
+            borderColor: colorArr[i],
+            backgroundColor: colorArr[i],  
+            borderWidth: 1 
+            })
+      }
+
       var ctx = document.getElementById("myChart").getContext('2d');
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: Object.values(historyObj)[0].forecast.list.map((ele) => moment(ele.dt_txt).format("l")),
-            datasets: [{
-                label: Object.keys(historyObj)[0], 
-                lineTension: 0,
-                data: Object.values(historyObj)[0]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
-                fill: false,
-                borderColor: '#cea2ac',
-                backgroundColor: '#cea2ac', 
-                borderWidth: 1 
-                },
-                {
-                label: Object.keys(historyObj)[1], 
-                lineTension: 0,
-                data: Object.values(historyObj)[1]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)),
-                fill: false,
-                borderColor: '#b3c3b8', 
-                backgroundColor: '#b3c3b8', 
-                borderWidth: 1 
-                },
-                {
-                label: Object.keys(historyObj)[2], 
-                lineTension: 0,
-                data: Object.values(historyObj)[2]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
-                fill: false,
-                borderColor: '#98dfea', 
-                backgroundColor: '#98dfea', 
-                borderWidth: 1 
-                }
-            ]},
+            datasets: dataForChart
+        },
             options: {
-                scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  },
                 plugins: {
                     responsive: true, 
                     maintainAspectRatio: false, 
                     title: {
                         display: true,
                         text: 'Temperature Comparision'
-                        },
-                    scales: {
-                        xAxes: [{
-                            gridLines: {
-                                display: false
-                            }
-                        }],
-                        yAxes: [{
-                            gridLines: {
-                                display: false
-                            },
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Temperature'
-                                }
-                        }]
+                        }
+                    },
+                scales: {
+                  y: {
+                    display: true,
+                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: 'Fahrenheit (°F)'
                     }
+                  }
                 }
-            }
+
+              }
       });
 }
 
