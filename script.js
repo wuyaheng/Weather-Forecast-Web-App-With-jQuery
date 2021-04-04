@@ -5,7 +5,7 @@ var MAP_CONTAINER = document.getElementById('mapidContainer')
 
 getWeatherForCity("New York")
 getWeatherForCity("Seattle")
-getWeatherForCity("Dallas")
+getWeatherForCity("Houston")
 
 localStorage.clear();
 
@@ -130,15 +130,15 @@ function updateCurrentWeather(cityName) {
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Object.values(historyObj)[0].forecast.list.map((ele) => ele.dt_txt),
+            labels: Object.values(historyObj)[0].forecast.list.map((ele) => moment(ele.dt_txt).format("L")),
             datasets: [{
-                label: Object.keys(historyObj)[0], // Name the series
+                label: Object.keys(historyObj)[0], 
                 lineTension: 0,
-                data: Object.values(historyObj)[0]?.forecast?.list.map((ele) => ele.main.temp), // Specify the data values array
+                data: Object.values(historyObj)[0]?.forecast?.list.map((ele) => ele.main.temp), 
                 fill: false,
-                borderColor: '#ED7188', // Add custom color border (Line)
-                backgroundColor: '#ED7188', // Add custom color background (Points and Fill)
-                borderWidth: 1 // Specify bar border width
+                borderColor: '#ED7188',
+                backgroundColor: '#ED7188', 
+                borderWidth: 1 
                 },
                 {
                 label: Object.keys(historyObj)[1], 
@@ -147,6 +147,15 @@ function updateCurrentWeather(cityName) {
                 fill: false,
                 borderColor: '#F6E394', 
                 backgroundColor: '#F6E394', 
+                borderWidth: 1 
+                },
+                {
+                label: Object.keys(historyObj)[2], 
+                lineTension: 0,
+                data: Object.values(historyObj)[2]?.forecast?.list.map((ele) => ele.main.temp),
+                fill: false,
+                borderColor: '#3A3238', 
+                backgroundColor: '#3A3238', 
                 borderWidth: 1 
                 }
             ]},
@@ -160,17 +169,17 @@ function updateCurrentWeather(cityName) {
             scales: {
                 xAxes: [{
                       gridLines: {
-                          display: false,
+                          display: false
                       }
                   }],
                 yAxes: [{
                       gridLines: {
-                          display: false,
+                          display: false
                       },
                       scaleLabel: {
                           display: true,
                           labelString: 'Temperature'
-                        } 
+                        }
                   }]
               }
             }

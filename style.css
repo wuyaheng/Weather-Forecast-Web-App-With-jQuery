@@ -58,11 +58,13 @@ input{
     padding-top: 0rem !important; 
     margin-top: 0rem !important;
     font-size: 20px !important;
-    color: #212529 !important;
+    font-weight: 600;
+    color: #3A3238 !important;
 }
 
 .navbar {
     padding: 0rem !important;
+    background: #EFD9CE !important;
 }
 
 #today .card {
@@ -105,4 +107,8 @@ p {
 
 body{
     zoom:100% !important;
+}
+
+.chartContainer {
+    height: 220px;
 }
