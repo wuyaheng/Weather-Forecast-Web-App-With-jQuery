@@ -7,7 +7,13 @@ getWeatherForCity("Seattle")
 getWeatherForCity("Houston")
 getWeatherForCity("New York")
 
+var colorArr = ['#cea2ac', '#bad0cf', '#c2cac1', '#fdcbac', '#e1ccba', '#3c787e', '#98c1d9', '#58586b', '#85ad87']
 
+
+
+setTimeout(function(){
+    populateLineChart()
+}, 1000);
 
 localStorage.clear();
 
@@ -95,9 +101,17 @@ function updateCurrentWeather(cityName) {
 	attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
 }).addTo(mymap);
 
+
+    var pinIcon = L.icon({
+        iconUrl: 'map-pin.png',
+        iconSize: [25, 25], 
+        iconAnchor:   [12, 25], 
+        popupAnchor:  [0, 20] 
+    });
+
     for(var key in historyObj) {
         var ele = historyObj[key]
-        L.marker([ele.current.coord.lat, ele.current.coord.lon]).addTo(mymap).bindTooltip("<div class='tooltipContainer'><img src='https://openweathermap.org/img/wn/" + ele.current.weather[0].icon + "@2x.png'/>" + "<p><b>"+ ele.current.name +"</b></p><p>" + ((Number(JSON.stringify(ele.current.main.temp)) - 273.15) * 9/5 + 32).toFixed(0) + "°F / " + (Number(JSON.stringify(ele.current.main.temp)) - 273.15).toFixed(0) + "°C" +" </p></div>").openTooltip();
+        L.marker([ele.current.coord.lat, ele.current.coord.lon], {icon: pinIcon}).addTo(mymap).bindTooltip("<div class='tooltipContainer'><img src='https://openweathermap.org/img/wn/" + ele.current.weather[0].icon + "@2x.png'/>" + "<p><b>"+ ele.current.name +"</b></p><p>" + ((Number(JSON.stringify(ele.current.main.temp)) - 273.15) * 9/5 + 32).toFixed(0) + "°F / " + (Number(JSON.stringify(ele.current.main.temp)) - 273.15).toFixed(0) + "°C" +" </p></div>").openTooltip();
     }
 
     var geoJson = L.geoJson(geodata.features, {
@@ -127,50 +141,6 @@ function updateCurrentWeather(cityName) {
           layer.bindTooltip("<p><b>" + feature.properties.name + "</b></p>");
         }
       }).addTo(mymap);
-
-      var colorArr = ['#cea2ac', '#bad0cf', '#c2cac1', '#fdcbac', '#e1ccba', '#3c787e', '#98c1d9', '#58586b', '#85ad87']
-      var dataForChart = []
-      for (var i = 0; i < Object.keys(historyObj).length; i++) {
-          dataForChart.push({
-            label: Object.keys(historyObj)[i], 
-            lineTension: 0,
-            data: Object.values(historyObj)[i]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
-            fill: false,
-            borderColor: colorArr[i],
-            backgroundColor: colorArr[i],  
-            borderWidth: 1 
-            })
-      }
-
-      var ctx = document.getElementById("myChart").getContext('2d');
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: Object.values(historyObj)[0].forecast.list.map((ele) => moment(ele.dt_txt).format("l")),
-            datasets: dataForChart
-        },
-            options: {
-                plugins: {
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    title: {
-                        display: true,
-                        text: 'Temperature Comparision'
-                        }
-                    },
-                scales: {
-                  y: {
-                    display: true,
-                    beginAtZero: true,
-                    title: {
-                      display: true,
-                      text: 'Fahrenheit (°F)'
-                    }
-                  }
-                }
-
-              }
-      });
 }
 
 function addToHistoryObj(city, dataType, data) {
@@ -183,7 +153,50 @@ function addToHistoryObj(city, dataType, data) {
 
 
 
+function populateLineChart() {
+    var dataForChart = []
+for (var i = 0; i < Object.keys(historyObj).length; i++) {
+    dataForChart.push({
+      label: Object.keys(historyObj)[i], 
+      lineTension: 0,
+      data: Object.values(historyObj)[i]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
+      fill: false,
+      borderColor: colorArr[i],
+      backgroundColor: colorArr[i],  
+      borderWidth: 1 
+      })
+}
 
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+      labels: Object.values(historyObj)[0]?.forecast.list.map((ele) => moment(ele.dt_txt).format("l")),
+      datasets: dataForChart
+  },
+      options: {
+          plugins: {
+              responsive: true, 
+              maintainAspectRatio: false, 
+              title: {
+                  display: true,
+                  text: 'Temperature Comparision'
+                  }
+              },
+          scales: {
+            y: {
+              display: true,
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Fahrenheit (°F)'
+              }
+            }
+          }
+
+        }
+});
+}
 
 
 
