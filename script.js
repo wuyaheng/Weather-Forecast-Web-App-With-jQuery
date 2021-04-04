@@ -119,7 +119,7 @@ function updateCurrentWeather(cityName) {
           return {
             color: "white",
             fillColor: "#EFD9CE",
-            fillOpacity: 0.6,
+            fillOpacity: 0.7,
             weight: 1.5
           };
         },      
@@ -171,7 +171,7 @@ var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'line',
   data: {
-      labels: Object.values(historyObj)[0]?.forecast.list.map((ele) => moment(ele.dt_txt).format("l")),
+      labels: Object.values(historyObj)[0]?.forecast.list.map((ele) => moment(ele.dt_txt).calendar()),
       datasets: dataForChart
   },
       options: {
@@ -180,7 +180,7 @@ var myChart = new Chart(ctx, {
               maintainAspectRatio: false, 
               title: {
                   display: true,
-                  text: 'Temperature Forecast Comparision'
+                  text: 'Temperature Forecast'
                   }
               },
           scales: {
