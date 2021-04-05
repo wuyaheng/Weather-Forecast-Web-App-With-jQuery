@@ -15,7 +15,7 @@
 
 
 ## TechUsed
-jQuery, AJAX
+jQuery, AJAX, Leaflet, Chart.js, API, JavaScript, HTML, CSS
 
 ## Link
 https://weather-dashboard-us.netlify.app/
