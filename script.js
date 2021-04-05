@@ -11,9 +11,8 @@ var colorArr = ['#cea2ac', '#bad0cf', '#c2cac1', '#fdcbac', '#e1ccba', '#3c787e'
 
 
 
-setTimeout(function(){
-    populateLineChart()
-}, 1000);
+populateLineChart()
+
 
 localStorage.clear();
 
@@ -58,6 +57,53 @@ function getWeatherForCity(name) {
             method: "GET"
         }).then(data => {
             addToHistoryObj(data.city.name, "forecast", data)
+
+            var newDataForChart = []
+
+            for (var i = 0; i < Object.keys(historyObj).length; i++) {
+                newDataForChart.push({
+                label: Object.keys(historyObj)[i], 
+                lineTension: 0,
+                data: Object.values(historyObj)[i]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
+                fill: false,
+                borderColor: colorArr[i],
+                backgroundColor: colorArr[i],  
+                borderWidth: 1 
+                })
+            }
+            document.getElementById("chartContainer").innerHTML = '&nbsp;';
+            document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
+            var ctx = document.getElementById("myChart").getContext("2d");
+
+            var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Object.values(historyObj)[0]?.forecast.list.map((ele) => moment(ele.dt_txt).calendar()),
+                datasets: newDataForChart
+            },
+                options: {
+                    plugins: {
+                        responsive: true, 
+                        maintainAspectRatio: false, 
+                        title: {
+                            display: true,
+                            text: '5 Days Temperature Forecast'
+                            }
+                        },
+                    scales: {
+                        y: {
+                        display: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Fahrenheit (°F)'
+                        }
+                        }
+                    }
+        
+                    }
+            });
+
         });
     }
 }
@@ -152,52 +198,53 @@ function addToHistoryObj(city, dataType, data) {
 }
 
 
-
 function populateLineChart() {
     var dataForChart = []
-for (var i = 0; i < Object.keys(historyObj).length; i++) {
-    dataForChart.push({
-      label: Object.keys(historyObj)[i], 
-      lineTension: 0,
-      data: Object.values(historyObj)[i]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
-      fill: false,
-      borderColor: colorArr[i],
-      backgroundColor: colorArr[i],  
-      borderWidth: 1 
-      })
-}
 
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-      labels: Object.values(historyObj)[0]?.forecast.list.map((ele) => moment(ele.dt_txt).calendar()),
-      datasets: dataForChart
-  },
-      options: {
-          plugins: {
-              responsive: true, 
-              maintainAspectRatio: false, 
-              title: {
-                  display: true,
-                  text: 'Temperature Forecast'
-                  }
-              },
-          scales: {
-            y: {
-              display: true,
-              beginAtZero: true,
-              title: {
+    for (var i = 0; i < Object.keys(historyObj).length; i++) {
+        dataForChart.push({
+        label: Object.keys(historyObj)[i], 
+        lineTension: 0,
+        data: Object.values(historyObj)[i]?.forecast?.list.map((ele) => ((Number(JSON.stringify(ele.main.temp)) - 273.15) * 9/5 + 32).toFixed(0)), 
+        fill: false,
+        borderColor: colorArr[i],
+        backgroundColor: colorArr[i],  
+        borderWidth: 1 
+        })
+    }
+
+    document.getElementById("chartContainer").innerHTML = '&nbsp;';
+    document.getElementById("chartContainer").innerHTML = '<canvas id="myChart"></canvas>';
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: Object.values(historyObj)[0]?.forecast.list.map((ele) => moment(ele.dt_txt).calendar()),
+        datasets: dataForChart
+    },
+        options: {
+            plugins: {
+                responsive: true, 
+                maintainAspectRatio: false, 
+                title: {
+                    display: true,
+                    text: '5 Days Temperature Forecast'
+                    }
+                },
+            scales: {
+                y: {
                 display: true,
-                text: 'Fahrenheit (°F)'
-              }
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Fahrenheit (°F)'
+                }
+                }
             }
-          }
 
-        }
-});
+            }
+    });
 }
-
 
 
 

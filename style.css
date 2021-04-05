@@ -121,15 +121,11 @@ body{
     zoom:100% !important;
 }
 
-.chartContainer {
-    height: 220px;
-}
-
 canvas {
     height: 260px !important;
 }
 
-.chartContainer {
+#chartContainer {
     height: 260px !important; 
 }
 
@@ -148,7 +144,7 @@ img {
 }
 
 @media only screen and (max-width: 768px) {
-    .chartContainer {
+    #chartContainer {
         display: none !important;
     }
   }
