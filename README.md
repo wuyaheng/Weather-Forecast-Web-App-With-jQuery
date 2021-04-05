@@ -1,4 +1,4 @@
-# Weather Forecast
+# Weather Dashboard
 
 ![WeatherDashboard](https://user-images.githubusercontent.com/52837649/113528780-a372be00-958f-11eb-9680-e94189f8d2ca.png)
 
