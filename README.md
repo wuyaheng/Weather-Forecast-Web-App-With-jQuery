@@ -21,7 +21,7 @@ Weather Forecast is a small application that displays today’s and the next fiv
 jQuery, AJAX
 
 ## Link
-https://phoebeyahengwu.github.io/Weather-Forecast-Web-App-With-jQuery/
+https://weather-dashboard-us.netlify.app/
 
 ## Usage
 Enter a city name in the input box and press the search icon next to it.
