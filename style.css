@@ -136,7 +136,9 @@ img {
 
 .row { 
     margin-bottom: 0 !important;
-}
+    margin-left: 0 !important; 
+    margin-right: 0 !important; 
+} 
 
 .history {
     overflow-y: auto;
@@ -147,4 +149,9 @@ img {
     #chartContainer {
         display: none !important;
     }
+    #leftSide {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
   }
+
