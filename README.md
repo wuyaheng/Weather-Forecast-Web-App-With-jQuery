@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-![WeatherDashboard](https://user-images.githubusercontent.com/52837649/113528780-a372be00-958f-11eb-9680-e94189f8d2ca.png)
+![Weather](https://user-images.githubusercontent.com/52837649/113581507-3b56c300-95f5-11eb-81b3-06f6b692e7d8.png)
 
 
 ## Table of Contents
@@ -18,7 +18,7 @@
 jQuery, AJAX, Leaflet, Chart.js, API, JavaScript, HTML, CSS
 
 ## Link
-https://weather-dashboard-us.netlify.app/
+https://weatherdashboard-us.netlify.app/
 
 ## Usage
 Enter a city name in the input box and press the search icon next to it.
