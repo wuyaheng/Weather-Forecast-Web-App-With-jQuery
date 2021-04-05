@@ -1,6 +1,6 @@
 # Weather Forecast
 
-![Weather](https://user-images.githubusercontent.com/52837649/85228900-62b90800-b3b4-11ea-85d0-5f1329b78a1e.gif)
+![WeatherDashboard](https://user-images.githubusercontent.com/52837649/113528780-a372be00-958f-11eb-9680-e94189f8d2ca.png)
 
 ## Description
 Weather Forecast is a small application that displays today’s and the next five days' weather condition of a city entered by the user.
