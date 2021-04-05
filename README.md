@@ -1,9 +1,6 @@
-# Weather Forecast
+# Weather Dashboard
 
-![Weather](https://user-images.githubusercontent.com/52837649/85228900-62b90800-b3b4-11ea-85d0-5f1329b78a1e.gif)
-
-## Description
-Weather Forecast is a small application that displays today’s and the next five days' weather condition of a city entered by the user.
+![WeatherDashboard](https://user-images.githubusercontent.com/52837649/113528780-a372be00-958f-11eb-9680-e94189f8d2ca.png)
 
 
 ## Table of Contents
@@ -18,16 +15,14 @@ Weather Forecast is a small application that displays today’s and the next fiv
 
 
 ## TechUsed
-jQuery, AJAX
+jQuery, AJAX, Leaflet, Chart.js, API, JavaScript, HTML, CSS
 
 ## Link
-https://phoebeyahengwu.github.io/Weather-Forecast-Web-App-With-jQuery/
+https://weather-dashboard-us.netlify.app/
 
 ## Usage
 Enter a city name in the input box and press the search icon next to it.
 
 ## Questions
-![user profile image](https://avatars0.githubusercontent.com/u/52837649?v=4)
-
 For questions about the project contact PhoebeYahengWu or directly at wuyaheng2016@gmail.com.
 
