@@ -68,7 +68,7 @@ function getWeatherForCity(name) {
                 fill: false,
                 borderColor: colorArr[i],
                 backgroundColor: colorArr[i],  
-                borderWidth: 1 
+                borderWidth: 3
                 })
             }
             document.getElementById("chartContainer").innerHTML = '&nbsp;';
@@ -82,6 +82,11 @@ function getWeatherForCity(name) {
                 datasets: newDataForChart
             },
                 options: {
+                    elements: {
+                        point:{
+                            radius: 0
+                        }
+                    },
                     plugins: {
                         responsive: true, 
                         maintainAspectRatio: false, 
@@ -91,7 +96,15 @@ function getWeatherForCity(name) {
                             }
                         },
                     scales: {
+                        x: {
+                            grid: {
+                                display: false
+                              }
+                        },
                         y: {
+                        grid: {
+                                display: false
+                              },
                         display: true,
                         beginAtZero: true,
                         title: {
@@ -214,7 +227,7 @@ function populateLineChart() {
         fill: false,
         borderColor: colorArr[i],
         backgroundColor: colorArr[i],  
-        borderWidth: 1 
+        borderWidth: 3
         })
     }
 
@@ -228,6 +241,11 @@ function populateLineChart() {
         datasets: dataForChart
     },
         options: {
+            elements: {
+                point:{
+                    radius: 0
+                }
+            },
             plugins: {
                 responsive: true, 
                 maintainAspectRatio: false, 
@@ -237,7 +255,15 @@ function populateLineChart() {
                     }
                 },
             scales: {
+                x: {
+                    grid: {
+                        display: false
+                      }
+                },
                 y: {
+                grid: {
+                        display: false
+                      },
                 display: true,
                 beginAtZero: true,
                 title: {
