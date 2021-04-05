@@ -27,7 +27,5 @@ https://weather-dashboard-us.netlify.app/
 Enter a city name in the input box and press the search icon next to it.
 
 ## Questions
-![user profile image](https://avatars0.githubusercontent.com/u/52837649?v=4)
-
 For questions about the project contact PhoebeYahengWu or directly at wuyaheng2016@gmail.com.
 
