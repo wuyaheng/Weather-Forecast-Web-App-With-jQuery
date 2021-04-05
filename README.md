@@ -18,7 +18,7 @@
 jQuery, AJAX, Leaflet, Chart.js, API, JavaScript, HTML, CSS
 
 ## Link
-https://weather-dashboard-us.netlify.app/
+https://weatherdashboard-us.netlify.app/
 
 ## Usage
 Enter a city name in the input box and press the search icon next to it.
