@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-![WeatherDashboard](https://user-images.githubusercontent.com/52837649/113528780-a372be00-958f-11eb-9680-e94189f8d2ca.png)
+![WeatherDashboard](https://user-images.githubusercontent.com/52837649/113535534-af677b80-95a1-11eb-880f-203f1e7d472d.png)
 
 
 ## Table of Contents
